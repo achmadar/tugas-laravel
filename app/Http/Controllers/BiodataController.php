@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BiodataMahasiswa;
+use App\Http\Requests\UpdateBiodata;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -13,11 +14,12 @@ use DataTables;
 
 class BiodataController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware(['auth']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -91,17 +93,32 @@ class BiodataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $validation = Validator::make($request->all(), [
-            "name" => "string|min:3|max:10|alpha",
-            "nim" => "string|min:8",
-            "alamat" => "string|min:10",
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $validation = Validator::make($request->all(), [
+    //         "name" => "string|min:3|max:10|alpha",
+    //         "nim" => "string|min:8",
+    //         "alamat" => "string|min:10",
+    //     ]);
 
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation)->withInput();
-        }
+    //     if ($validation->fails()) {
+    //         return redirect()->back()->withErrors($validation)->withInput();
+    //     }
+
+    //     BiodataMahasiswa::where("id", $id)->update($request->except("_token", "_method"));
+    //     return redirect()->route("biodata.index");
+    // }
+
+    public function update(UpdateBiodata $request, $id) {
+        // $validation = Validator::make($request->all(), [
+        //     "name" => "string|min:3|max:10|alpha",
+        //     "nim" => "string|min:8",
+        //     "alamat" => "string|min:10",
+        // ]);
+
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation)->withInput();
+        // }
 
         BiodataMahasiswa::where("id", $id)->update($request->except("_token", "_method"));
         return redirect()->route("biodata.index");
