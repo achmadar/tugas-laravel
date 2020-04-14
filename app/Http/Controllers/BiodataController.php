@@ -93,22 +93,6 @@ class BiodataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     $validation = Validator::make($request->all(), [
-    //         "name" => "string|min:3|max:10|alpha",
-    //         "nim" => "string|min:8",
-    //         "alamat" => "string|min:10",
-    //     ]);
-
-    //     if ($validation->fails()) {
-    //         return redirect()->back()->withErrors($validation)->withInput();
-    //     }
-
-    //     BiodataMahasiswa::where("id", $id)->update($request->except("_token", "_method"));
-    //     return redirect()->route("biodata.index");
-    // }
-
     public function update(UpdateBiodata $request, $id) {
         // $validation = Validator::make($request->all(), [
         //     "name" => "string|min:3|max:10|alpha",
