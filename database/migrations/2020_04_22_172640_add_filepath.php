@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class BiodataMahasiswa extends Migration
+class AddFilepath extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class BiodataMahasiswa extends Migration
      */
     public function up()
     {
-        Schema::create("biodata_mahasiswa", function (Blueprint $table){
-            $table->increments("id");
-            $table->string("name");
-            $table->string("nim")->unique();
-            $table->text("address");
+        Schema::table('biodata_mahasiswa', function(Blueprint $table){
             $table->string("filePath");
-            $table->timestamps("");
         });
     }
 
@@ -30,6 +25,6 @@ class BiodataMahasiswa extends Migration
      */
     public function down()
     {
-        Schema::drop("biodata_mahasiswa");
+        //
     }
 }

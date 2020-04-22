@@ -7,7 +7,8 @@
 	<li>Nama Mahasiswa: {{ $data->name }} </li>
 	<li>NIM Mahasiswa: {{ $data->nim }} </li>
 	<li>Alamat Mahasiswa: {{ $data->address }} </li>
-	<li>Picture : <br><img src="{{ Storage::url( $data->photo ) }}" alt="{{ Storage::url( $data->photo ) }}" width="150px"></li>
+	<li>File Path : {{ $data->filePath}}</li>
+	<li><img src="{{ asset('photo_mhs/'.$data->photo) }}" id="showgambar" style="max-width:200px;max-height:200px;" /> </li></li>
 </ul>
 
 <a class="btn btn-dark" href="{{ route('biodata.index') }}">Kembali</a>

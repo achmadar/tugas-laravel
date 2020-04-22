@@ -1,41 +1,38 @@
+@section('js')
+<script type="text/javascript">
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#showgambar').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#inputgambar").change(function () {
+        readURL(this);
+    });
+</script>
+
+@stop
 @extends("layout")
+
+@push("style")
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+@endpush
 
 @section("content")
 
-    <h1>
-        Daftar Mahasiswa
-        <a href="{{ route('biodata.create') }}" type="button" class="btn btn-primary" style="float: right;">Tambah</a>
-        <a href="{{ route('biodata.export_excel') }}" type="button" class="btn btn-danger mr-1" target="_blank" style="float: right;">Download Excel</a>
-    </h1>
-    
-    <br>
-    <table class="table table-striped table-hover text-center" id="myTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>NAMA</th>
-                <th>NIM</th>
-                <th width="20%">ACTION</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($mahasiswa as $data)
-                <tr>
-                    <td>{{ $data->id }}</td>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->nim }}</td>
-                    <td>
-                        <a href="{{ route('biodata.show', ['biodatum' => $data->id]) }}" class="btn btn-success">Detail</a>
-                        <a href="{{ route('biodata.edit', ['biodatum' => $data->id]) }}" class="btn btn-warning">Edit</a>
-                        <a onclick="return confirm('Apakah Anda yakin?');" href="{{ route('biodata.destroy', ['biodatum' => $data->id]) }}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4">Data belum tersedia!</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+        <h1>Daftar Mahasiswa
+            <a href="{{ route('biodata.create') }}" class="btn btn-info" style="float: right;">Tambahkan</a><br><br>
+            <a href="/biodata-mahasiswa/export_excel" class="btn btn-success my-3" target="_blank" style="float: right;">EXPORT EXCEL</a>
+        </h1>
+        {!!$html->table()!!}
 
-@endsection
+   
+@endsection("content")
+
+@push("script")
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    {!! $html->scripts() !!}
+@endpush
