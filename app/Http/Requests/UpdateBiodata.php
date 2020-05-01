@@ -24,7 +24,7 @@ class UpdateBiodata extends FormRequest
     {
         return [
             "name" => "string|min:3|max:10|alpha",
-            "nim" => "string|min:8",
+            "nim" => "string|min:10",
             "alamat" => "string|min:10",
         ];
     }
